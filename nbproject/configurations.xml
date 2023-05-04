@@ -8,11 +8,11 @@
       <in>eink.c</in>
       <in>font.c</in>
       <in>meter.c</in>
-      <in>meter.h</in>
       <in>spi.c</in>
       <in>sram.c</in>
       <in>thermidity.c</in>
       <in>unifont.c</in>
+      <in>usart.c</in>
     </df>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -87,6 +87,10 @@
         <cTool flags="0">
         </cTool>
       </item>
+      <item path="/home/dode/dev/thermidity/meter.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="0">
+        </cTool>
+      </item>
       <item path="/home/dode/dev/thermidity/spi.c" ex="false" tool="0" flavor2="3">
         <cTool flags="0">
         </cTool>
@@ -109,9 +113,9 @@
         <cTool flags="0">
         </cTool>
       </item>
-      <item path="meter.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="meter.h" ex="false" tool="3" flavor2="0">
+      <item path="/home/dode/dev/thermidity/usart.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="0">
+        </cTool>
       </item>
     </conf>
   </confs>
