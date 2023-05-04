@@ -15,6 +15,7 @@
 #include "dejavu.h"
 #include "display.h"
 #include "usart.h"
+#include "utils.h"
 
 static uint32_t mVAvgTmp = -1;
 static uint32_t mvAvgRh = -1;
@@ -76,10 +77,9 @@ static char * formatRh(int32_t rhx10) {
         return "+99%";
     }
     
-    div_t rh = div(rhx10, 10);
-    uint8_t round = rh.rem > 4 ? 1 : 0;
+    int32_t rh = divRoundNearest(rhx10, 10);
     static char buf[6];
-    snprintf(buf, sizeof (buf), "%3d%%", rh.quot + round);
+    snprintf(buf, sizeof (buf), "%3ld%%", rh);
     
     return buf;
 }

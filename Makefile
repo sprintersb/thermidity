@@ -11,7 +11,7 @@ PROGRAMMER_TYPE = avrispmkII
 PROGRAMMER_ARGS = 
 
 MAIN = thermidity.c
-SRC = meter.c font.c unifont.c dejavu.c bitmaps.c spi.c sram.c eink.c display.c usart.c
+SRC = meter.c font.c unifont.c dejavu.c bitmaps.c spi.c sram.c eink.c display.c usart.c utils.c
 
 CC = avr-gcc
 OBJCOPY = avr-objcopy
