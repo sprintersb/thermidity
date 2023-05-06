@@ -104,7 +104,7 @@ static void initADC(void) {
     ADMUX |= (1 << REFS0);
     // disable digital input on the ADC inputs to reduce digital noise
     DIDR0 = 0b00111111;
-    // ADC clock prescaler/64 ~ 15.6 kHz @ 1 MHz ~ 125 kHz @ 8 MHz
+    // ADC clock prescaler/64 ~ 125 kHz @ 8 MHz
     ADCSRA |= (1 << ADPS2) | (1 << ADPS1);
     // enable ADC interrupt
     ADCSRA |= (1 << ADIE);

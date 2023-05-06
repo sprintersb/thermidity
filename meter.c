@@ -45,6 +45,7 @@ static uint32_t convert(uint8_t pin, uint32_t mVAvg) {
             // avoid division of a negative value via bit shift
             return 0;
         } else {
+            // TODO verify
             return mV + mVAvg - ((mVAvg - EWMA_BS) >> EWMA_BS);
         }
     }

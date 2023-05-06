@@ -14,3 +14,5 @@ following components:
     * Driver SSD1680
     * SRAM 23K640
     * SD Card Reader (not used) 
+
+<img src="https://luniks.net/other/Thermidity/Thermidity-01.jpg"/>
