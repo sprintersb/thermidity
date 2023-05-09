@@ -125,15 +125,15 @@ int main(void) {
 
     while (true) {
         
-        // measure and average temperature and relative humidity every 5 seconds
-        if (ints % (INTS_SEC * 5) == 0) {
+        // measure and average temperature and relative humidity every 30 seconds
+        if (ints % (INTS_SEC * 30) == 0) {
             measureValues();
-        }
-
-        // display should not be updated more frequently than once every 180 seconds
-        if (ints >= INTS_SEC * 180) {
-            ints = 0;
-            displayValues();
+            
+            // display should not be updated more frequently than once every 180 seconds
+            if (ints >= (INTS_SEC * 180)) {
+                ints = 0;
+                displayValues();                
+            }
         }
     }
 
