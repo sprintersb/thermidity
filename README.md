@@ -15,4 +15,4 @@ following components:
     * SRAM 23K640
     * SD Card Reader (not used) 
 
-<img src="https://luniks.net/other/Thermidity/Thermidity-02.jpg"/>
+<img src="https://luniks.net/other/Thermidity/Thermidity-03.jpg"/>
