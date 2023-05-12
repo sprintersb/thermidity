@@ -36,18 +36,12 @@ static uint32_t convert(uint8_t pin, uint32_t mVAvg) {
     }
 
     uint32_t mV = ((overValue >> 2) * AREF_MV) >> 12;
-
+    
     if (mVAvg == -1) {
         // use first measurement as initial value for average
         return mV << EWMA_BS;
     } else {
-        if (mVAvg < EWMA_BS) {
-            // avoid division of a negative value via bit shift
-            return 0;
-        } else {
-            // TODO verify
-            return mV + mVAvg - ((mVAvg - EWMA_BS) >> EWMA_BS);
-        }
+        return mV + mVAvg - (mVAvg >> EWMA_BS);
     }
 }
 
@@ -87,7 +81,7 @@ static char * formatRh(int32_t rhx10) {
 
 void measureValues(void) {
     mVAvgTmp = convert(PIN_TMP, mVAvgTmp);
-    mvAvgRh = convert(PIN_RH, mvAvgRh);
+    mvAvgRh = convert(PIN_RH, mvAvgRh);    
 }
 
 void displayValues(void) {
@@ -99,13 +93,13 @@ void displayValues(void) {
     // temperature in °C multiplied by 10
     int16_t tmpx10 = (mVAvgTmp >> EWMA_BS) - TMP36_MV_0C;
     // relative humidity in % multiplied by 10
-    uint32_t rhx10 = (mvAvgRh * 100 - (75750UL << EWMA_BS)) / (318UL << EWMA_BS);
+    int32_t rhx10 = (mvAvgRh * 100 - (75750UL << EWMA_BS)) / (318UL << EWMA_BS);
     // temperature compensation of relative humidity
     rhx10 = (rhx10 * 1000000) / (1054600 - tmpx10 * 216UL);
     
     Font unifont = getUnifont();
     Font dejavu = getDejaVu();
-
+    
     setFrame(0x00);
     writeString(0, 0, dejavu, formatTmp(tmpx10));
     writeString(4, 152, unifont, "Temperature");
