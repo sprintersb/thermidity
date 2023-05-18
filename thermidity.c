@@ -120,6 +120,9 @@ int main(void) {
     // enable global interrupts
     sei();
     
+    // allow to settle a bit
+    _delay_ms(1000);
+    
     while (true) {
         // measure and average temperature and relative humidity
         if (barks % MEASURE_BARKS == 0) {
