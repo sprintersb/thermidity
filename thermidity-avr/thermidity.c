@@ -120,7 +120,10 @@ static void reducePower(void) {
 
 int main(void) {
 
+<<<<<<< HEAD:thermidity-avr/thermidity.c
     reducePower();
+=======
+>>>>>>> 7e9f1fc (wdt_reset() is not necessary):thermidity.c
     initPins();
     initSPI();
     initWatchdog();
@@ -129,10 +132,10 @@ int main(void) {
 
     // enable global interrupts
     sei();
-    
+
     // allow to settle a bit
     _delay_ms(1000);
-    
+
     while (true) {
         // measure and average temperature and relative humidity
         if (barks % MEASURE_BARKS == 0) {
