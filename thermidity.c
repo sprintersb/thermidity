@@ -33,8 +33,9 @@
 #include "usart.h"
 
 #define SECS_PER_BARK   8
+/* Should be by power of two to make modulo not expensive (hopefully) */
 #define MEASURE_BARKS   2 // 16 seconds
-// display should not be updated more frequently than once every 180 seconds
+/* Display should not be updated more frequently than once every 180 seconds */
 #define DISP_UPD_BARKS  24 // 192 seconds
 
 static volatile uint16_t barks = DISP_UPD_BARKS;
@@ -110,7 +111,7 @@ static void initADC(void) {
 }
 
 int main(void) {
-    
+
     initPins();
     initSPI();
     initWatchdog();
@@ -119,10 +120,10 @@ int main(void) {
 
     // enable global interrupts
     sei();
-    
+
     // allow to settle a bit
     _delay_ms(1000);
-    
+
     while (true) {
         // measure and average temperature and relative humidity
         if (barks % MEASURE_BARKS == 0) {
@@ -130,12 +131,11 @@ int main(void) {
 
             // update display
             if (barks >= DISP_UPD_BARKS) {
-                displayValues();
                 barks = 0;
+                displayValues();
             }
         }
-        
-        wdt_reset();
+
         set_sleep_mode(SLEEP_MODE_PWR_SAVE);
         sleep_mode();
     }
