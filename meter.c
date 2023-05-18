@@ -28,8 +28,8 @@ static int8_t  prevVBatx10;
 
 /*
  * Converts the voltage at the given pin with 16x oversampling during
- * idle sleep mode to reduce digital noise, updates the given exponential
- * weighted moving average and returns it.
+ * ADC noise reduction mode to reduce digital noise, updates the given 
+ * exponential weighted moving average and returns it.
  */
 static uint32_t convert(uint8_t pin, uint32_t mVAvg) {
     ADMUX = (0xf0 & ADMUX) | pin;
