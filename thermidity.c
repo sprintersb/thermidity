@@ -110,13 +110,22 @@ static void initADC(void) {
     ADCSRA |= (1 << ADEN);
 }
 
+/**
+ * Stops the clock of unused modules to reduce power consumption.
+ */
+static void reducePower(void) {
+    // stop TWI, Timer0, Timer1 and USART
+    PRR |= (1 << PRTWI) | (1 << PRTIM0) | (1 << PRTIM1) | (1 << PRUSART0);
+}
+
 int main(void) {
 
+    reducePower();
     initPins();
     initSPI();
     initWatchdog();
     initADC();
-    initUSART();
+    // initUSART();
 
     // enable global interrupts
     sei();
