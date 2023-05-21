@@ -13,3 +13,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: bazhenov/action-avr-make@v1.0
+      working-directory: thermidity-avr
