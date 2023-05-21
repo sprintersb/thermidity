@@ -92,7 +92,7 @@ static void initWatchdog(void) {
     wdt_reset();
     // watchdog change enable
     WDTCSR |= (1 << WDCE) | (1 << WDE);
-    // disable system reset, enable interrupt, bark every 8 seconds
+    // enable interrupt, disable system reset, bark every 8 seconds
     WDTCSR = (1 << WDIE) | (0 << WDE) | (1 << WDP3) | (1 << WDP0);
 }
 
