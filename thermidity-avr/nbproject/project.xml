@@ -10,7 +10,7 @@
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList>
-                <sourceRootElem>/home/dode/dev/thermidity</sourceRootElem>
+                <sourceRootElem>/home/dode/dev/thermidity/thermidity-avr</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

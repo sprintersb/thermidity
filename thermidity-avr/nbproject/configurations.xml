@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="100">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
-    <df root="/home/dode/dev/thermidity" name="0">
+    <df root="/home/dode/dev/thermidity/thermidity-avr" name="0">
       <in>bitmaps.c</in>
       <in>dejavu.c</in>
       <in>display.c</in>
@@ -13,20 +13,21 @@
       <in>thermidity.c</in>
       <in>unifont.c</in>
       <in>usart.c</in>
+      <in>utils.c</in>
     </df>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
                    projectFiles="false"
                    kind="IMPORTANT_FILES_FOLDER">
-      <itemPath>/home/dode/dev/thermidity/Makefile</itemPath>
-      <itemPath>/home/dode/dev/thermidity/nbproject/private/launcher.properties</itemPath>
+      <itemPath>/home/dode/dev/thermidity/thermidity-avr/Makefile</itemPath>
+      <itemPath>/home/dode/dev/thermidity/thermidity-avr/nbproject/private/launcher.properties</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
   <sourceRootList>
-    <Elem>/home/dode/dev/thermidity</Elem>
+    <Elem>/home/dode/dev/thermidity/thermidity-avr</Elem>
   </sourceRootList>
-  <projectmakefile>/home/dode/dev/thermidity/Makefile</projectmakefile>
+  <projectmakefile>/home/dode/dev/thermidity/thermidity-avr/Makefile</projectmakefile>
   <confs>
     <conf name="Default" type="0">
       <toolsSet>
@@ -41,10 +42,10 @@
       </codeAssistance>
       <makefileType>
         <makeTool>
-          <buildCommandWorkingDir>/home/dode/dev/thermidity</buildCommandWorkingDir>
+          <buildCommandWorkingDir>/home/dode/dev/thermidity/thermidity-avr</buildCommandWorkingDir>
           <buildCommand>${MAKE} -f Makefile</buildCommand>
           <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
-          <executablePath>/home/dode/dev/thermidity/thermidity.elf</executablePath>
+          <executablePath>/home/dode/dev/thermidity/thermidity-avr/thermidity.elf</executablePath>
           <cTool>
             <incDir>
               <pElem>.</pElem>
@@ -61,59 +62,87 @@
           <preBuildCommand></preBuildCommand>
         </preBuild>
       </makefileType>
-      <item path="/home/dode/dev/thermidity/bitmaps.c"
+      <item path="/home/dode/dev/thermidity/thermidity-avr/bitmaps.c"
             ex="false"
             tool="0"
             flavor2="3">
         <cTool flags="0">
         </cTool>
       </item>
-      <item path="/home/dode/dev/thermidity/dejavu.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
-        </cTool>
-      </item>
-      <item path="/home/dode/dev/thermidity/display.c"
+      <item path="/home/dode/dev/thermidity/thermidity-avr/dejavu.c"
             ex="false"
             tool="0"
             flavor2="3">
         <cTool flags="0">
         </cTool>
       </item>
-      <item path="/home/dode/dev/thermidity/eink.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
-        </cTool>
-      </item>
-      <item path="/home/dode/dev/thermidity/font.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
-        </cTool>
-      </item>
-      <item path="/home/dode/dev/thermidity/meter.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
-        </cTool>
-      </item>
-      <item path="/home/dode/dev/thermidity/spi.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
-        </cTool>
-      </item>
-      <item path="/home/dode/dev/thermidity/sram.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
-        </cTool>
-      </item>
-      <item path="/home/dode/dev/thermidity/thermidity.c"
+      <item path="/home/dode/dev/thermidity/thermidity-avr/display.c"
             ex="false"
             tool="0"
             flavor2="3">
         <cTool flags="0">
         </cTool>
       </item>
-      <item path="/home/dode/dev/thermidity/unifont.c"
+      <item path="/home/dode/dev/thermidity/thermidity-avr/eink.c"
             ex="false"
             tool="0"
             flavor2="3">
         <cTool flags="0">
         </cTool>
       </item>
-      <item path="/home/dode/dev/thermidity/usart.c" ex="false" tool="0" flavor2="3">
+      <item path="/home/dode/dev/thermidity/thermidity-avr/font.c"
+            ex="false"
+            tool="0"
+            flavor2="3">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="/home/dode/dev/thermidity/thermidity-avr/meter.c"
+            ex="false"
+            tool="0"
+            flavor2="3">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="/home/dode/dev/thermidity/thermidity-avr/spi.c"
+            ex="false"
+            tool="0"
+            flavor2="3">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="/home/dode/dev/thermidity/thermidity-avr/sram.c"
+            ex="false"
+            tool="0"
+            flavor2="3">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="/home/dode/dev/thermidity/thermidity-avr/thermidity.c"
+            ex="false"
+            tool="0"
+            flavor2="3">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="/home/dode/dev/thermidity/thermidity-avr/unifont.c"
+            ex="false"
+            tool="0"
+            flavor2="3">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="/home/dode/dev/thermidity/thermidity-avr/usart.c"
+            ex="false"
+            tool="0"
+            flavor2="3">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="/home/dode/dev/thermidity/thermidity-avr/utils.c"
+            ex="false"
+            tool="0"
+            flavor2="3">
         <cTool flags="0">
         </cTool>
       </item>
