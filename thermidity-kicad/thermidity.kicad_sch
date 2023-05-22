@@ -1089,25 +1089,6 @@
     (pin "2" (uuid 2f4b35d1-86f2-4825-b0a1-61d407b6eb36))
   )
 
-  (symbol (lib_id "Device:C") (at 118.11 85.09 0) (unit 1)
-    (in_bom yes) (on_board yes) (fields_autoplaced)
-    (uuid db40b7f0-e6a5-4142-b519-2f92cc164ff2)
-    (property "Reference" "C6" (id 0) (at 121.92 83.8199 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "100nF" (id 1) (at 121.92 86.3599 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder" (id 2) (at 119.0752 88.9 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (id 3) (at 118.11 85.09 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid d751c08e-7792-43f8-85df-0e5bac295d10))
-    (pin "2" (uuid 0361e120-5537-426b-9fb7-9cfa30773918))
-  )
-
   (symbol (lib_id "HIH-5030-001:HIH-5030-001") (at 133.35 91.44 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid e6831fa3-d0e2-442b-bad0-235e2cccce1e)
@@ -1207,9 +1188,6 @@
     )
     (path "/0178a398-4cac-462d-a5f8-54e853b1fa89"
       (reference "C5") (unit 1) (value "100nF") (footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder")
-    )
-    (path "/db40b7f0-e6a5-4142-b519-2f92cc164ff2"
-      (reference "C6") (unit 1) (value "100nF") (footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder")
     )
     (path "/60063fea-c781-49af-81c6-4ddf33326155"
       (reference "J1") (unit 1) (value "ISP") (footprint "")
