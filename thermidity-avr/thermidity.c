@@ -120,10 +120,7 @@ static void reducePower(void) {
 
 int main(void) {
 
-<<<<<<< HEAD:thermidity-avr/thermidity.c
     reducePower();
-=======
->>>>>>> 7e9f1fc (wdt_reset() is not necessary):thermidity.c
     initPins();
     initSPI();
     initWatchdog();
