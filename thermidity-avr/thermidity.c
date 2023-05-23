@@ -87,7 +87,7 @@ static void initTimer(void) {
     // timer2 clear timer on compare match mode, TOP OCR2A
     TCCR2A |= (1 << WGM21);
     // timer2 clock prescaler/1024/255 ~ 31 Hz @ 8 Mhz
-    TCCR2B |= (1<<CS22) | (1<<CS21) | (1<<CS20);
+    TCCR2B |= (1 << CS22) | (1 << CS21) | (1 << CS20);
     OCR2A = 255;
 
     // enable timer2 compare match A interrupt
