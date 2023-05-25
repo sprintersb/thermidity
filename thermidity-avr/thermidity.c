@@ -31,13 +31,17 @@
 #include "utils.h"
 #include "usart.h"
 
-/* Timer2 interrupts per second */
-#define INTS_SEC    F_CPU / (1024UL * 255)
+/* 32.768kHz / 1024 / 32 = 1Hz */
+#define TIMER_COMPARE   32
+/* Measure and average temperature and relative humidity every 16 seconds */
+#define MEASURE_SECS    16
+/* Display should not be updated more frequently than once every 180 seconds */
+#define DISP_UPD_SECS   192
 
-static volatile uint32_t ints = INTS_SEC * 191;
+static volatile uint16_t secs = DISP_UPD_SECS;
 
 ISR(TIMER2_COMPA_vect) {
-    ints++;
+    secs++;
 }
 
 EMPTY_INTERRUPT(ADC_vect);
@@ -84,11 +88,13 @@ static void initSPI(void) {
  * Sets up the timer.
  */
 static void initTimer(void) {
+    // clock async'ly by external 32.768kHz watch crystal
+    ASSR |= (1 << AS2);
     // timer2 clear timer on compare match mode, TOP OCR2A
     TCCR2A |= (1 << WGM21);
-    // timer2 clock prescaler/1024/255 ~ 31 Hz @ 8 Mhz
+    // timer2 clock divided by 1024
     TCCR2B |= (1 << CS22) | (1 << CS21) | (1 << CS20);
-    OCR2A = 255;
+    OCR2A = TIMER_COMPARE;
 
     // enable timer2 compare match A interrupt
     TIMSK2 |= (1 << OCIE2A);
@@ -100,12 +106,24 @@ static void initTimer(void) {
 static void initADC(void) {
     // disable digital input on the ADC inputs to reduce digital noise
     DIDR0 = 0b00111111;
-    // ADC clock prescaler/64 ~ 125 kHz @ 8 MHz
+    // ADC clock prescaler/64 ~ 125kHz @ 8MHz
     ADCSRA |= (1 << ADPS2) | (1 << ADPS1);
     // enable ADC interrupt
     ADCSRA |= (1 << ADIE);
-    // enable ADC
+}
+
+/**
+ * Enables the ADC.
+ */
+static void enableADC(void) {
     ADCSRA |= (1 << ADEN);
+}
+
+/**
+ * Disables the ADC.
+ */
+static void disableADC(void) {
+    ADCSRA &= ~(1 << ADEN);
 }
 
 /**
@@ -127,20 +145,30 @@ int main(void) {
 
     // enable global interrupts
     sei();
+    
+    // allow to settle a bit (32.768kHz oscillator to stabilize)
+    _delay_ms(1500);
 
     while (true) {
-
-        // measure and average temperature and relative humidity every 16 seconds
-        if (ints % (INTS_SEC * 16) == 0) {
+        if (secs % MEASURE_SECS == 0) {
+            enableADC();
+            // give the ADC some time after "asynchronous" sleep mode, 
+            // otherwise the first measurement will be quite off.  
+            _delay_ms(1);
             measureValues();
+            // disable ADC before entering sleep mode to save power
+            disableADC();
 
-            // display should not be updated more frequently than once every 180 seconds
-            if (ints >= (INTS_SEC * 192)) {
-                ints = 0;
+            if (secs >= DISP_UPD_SECS) {
+                secs = 0;
                 displayValues();
             }
         }
-
+        
+        // ensure that one TOSC1 cycle has elapsed before re-entering sleep mode
+        OCR2A = TIMER_COMPARE;
+        loop_until_bit_is_clear(ASSR, OCR2AUB);
+        
         set_sleep_mode(SLEEP_MODE_PWR_SAVE);
         sleep_mode();
     }
