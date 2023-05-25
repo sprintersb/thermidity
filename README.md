@@ -64,8 +64,8 @@ mode, consumption briefly goes above 400µA.
 
 When updating the display, consumption is at around 6mA for about 2-3 seconds.
 
-When no measurement has changed, the display is not updated to extend the 
-liftime and to further save power.
+When no measurement has changed, the display is not updated to extend its 
+lifetime and to further save power.
 
 The clock of unused modules such as Timer0, Timer1 and USART is switched off to 
 reduce power consumption.
