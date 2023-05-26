@@ -23,7 +23,7 @@ following components:
 
 ## Accuracy
 
-ADC conversion is done with 16x oversampling, yielding 12-bit virtual resolution 
+AD conversion is done with 16x oversampling, yielding 12-bit virtual resolution 
 with the 10-bit ADC, provided the signal contains some noise.
 
 Each time measurements were taken, a moving average is updated which is used to 
@@ -57,7 +57,7 @@ Power consumption then is at about 390µA at 3.8V:
 ¹Calculated
 
 The remainder of 26µA is probably due to measurement error + MCU power 
-consumption (datasheet says 0.9µA at 3V).
+consumption (data sheet says 0.9µA at 3V).
 
 When measuring temperature, humidity and battery voltage in ADC noise reduction 
 mode, consumption briefly goes above 400µA.
