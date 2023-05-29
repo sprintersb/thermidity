@@ -32,7 +32,7 @@
 #include "usart.h"
 
 /* 32.768kHz / 1024 / 32 = 1Hz */
-#define TIMER_COMPARE   32
+#define TIMER_COMPARE   31
 /* Measure and average temperature and relative humidity every 16 seconds */
 #define MEASURE_SECS    16
 /* Display should not be updated more frequently than once every 180 seconds */
@@ -58,21 +58,21 @@ static void initPins(void) {
     PORT_SPI |= (1 << PIN_MISO);
 
     // set SRAM CS pin as output pin
-    DDR_SRDI |= (1 << PIN_SRCS);
+    DDR_SSPI |= (1 << PIN_SRCS);
 
     // set display CS, D/C and RST pin as output pin
-    DDR_SRDI |= (1 << PIN_ECS);
-    DDR_SRDI |= (1 << PIN_DC);
-    DDR_SRDI |= (1 << PIN_RST);
+    DDR_DSPI |= (1 << PIN_ECS);
+    DDR_DSPI |= (1 << PIN_DC);
+    DDR_DISP |= (1 << PIN_RST);
 
     // enable pullup on all output pins
-    PORT_SRDI |= (1 << PIN_SRCS);
-    PORT_SRDI |= (1 << PIN_ECS);
-    PORT_SRDI |= (1 << PIN_DC);
-    PORT_SRDI |= (1 << PIN_RST);
+    PORT_SSPI |= (1 << PIN_SRCS);
+    DDR_DSPI |= (1 << PIN_ECS);
+    DDR_DSPI |= (1 << PIN_DC);
+    PORT_DISP |= (1 << PIN_RST);
 
     // set display BUSY pin as input pin
-    DDR_SRDI &= ~(1 << PIN_BUSY);
+    PORT_DISP &= ~(1 << PIN_BUSY);
 }
 
 /**

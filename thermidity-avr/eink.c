@@ -19,24 +19,24 @@
  * Does a hardware reset.
  */
 static void hwReset(void) {
-    PORT_SRDI &= ~(1 << PIN_RST);
+    PORT_DISP &= ~(1 << PIN_RST);
     _delay_ms(10);
-    PORT_SRDI |= (1 << PIN_RST);
+    PORT_DISP |= (1 << PIN_RST);
 }
 
 /**
  * Waits until the display is no longer busy.
  */
 static void waitBusy(void) {
-    loop_until_bit_is_clear(PINP_SRDI, PIN_BUSY);
+    loop_until_bit_is_clear(PINP_DISP, PIN_BUSY);
 }
 
 void displayCmd(void) {
-    PORT_SRDI &= ~(1 << PIN_DC);
+    PORT_DSPI &= ~(1 << PIN_DC);
 }
 
 void displayData(void) {
-    PORT_SRDI |= (1 << PIN_DC);
+    PORT_DSPI |= (1 << PIN_DC);
 }
 
 void initDisplay(void) {

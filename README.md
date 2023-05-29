@@ -35,7 +35,7 @@ are used:
 | Component | Accuracy |
 |-----------|---------:|
 | MCP1501   |     0.1% |
-| TMP36     |    ±2°C  |
+| TMP36     |   ±1-2°C |
 | HIH-5030  |    ±3%RH |
 
 
