@@ -19,6 +19,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/sleep.h>
+#include <avr/wdt.h>
 #include <avr/pgmspace.h>
 #include <util/delay.h>
 
@@ -31,16 +32,14 @@
 #include "utils.h"
 #include "usart.h"
 
-/* 32.768kHz / 1024 / 32 = 1Hz */
-#define TIMER_COMPARE   31
 /* Measure and average temperature and relative humidity every 16 seconds */
 #define MEASURE_SECS    16
 /* Display should not be updated more frequently than once every 180 seconds */
 #define DISP_UPD_SECS   192
 
-static volatile uint16_t secs = DISP_UPD_SECS;
+static volatile uint16_t secs = DISP_UPD_SECS - 1;
 
-ISR(TIMER2_COMPA_vect) {
+ISR(WDT_vect) {
     secs++;
 }
 
@@ -85,19 +84,15 @@ static void initSPI(void) {
 }
 
 /**
- * Sets up the timer.
+ * Sets up the watchdog.
  */
-static void initTimer(void) {
-    // clock async'ly by external 32.768kHz watch crystal
-    ASSR |= (1 << AS2);
-    // timer2 clear timer on compare match mode, TOP OCR2A
-    TCCR2A |= (1 << WGM21);
-    // timer2 clock divided by 1024
-    TCCR2B |= (1 << CS22) | (1 << CS21) | (1 << CS20);
-    OCR2A = TIMER_COMPARE;
-
-    // enable timer2 compare match A interrupt
-    TIMSK2 |= (1 << OCIE2A);
+static void initWatchdog(void) {
+    cli();
+    wdt_reset();
+    // watchdog change enable
+    WDTCSR |= (1 << WDCE) | (1 << WDE);
+    // enable interrupt, disable system reset, bark every 1 seconds
+    WDTCSR = (1 << WDIE) | (0 << WDE) | (1 << WDP2) | (1 << WDP1);
 }
 
 /**
@@ -139,22 +134,16 @@ int main(void) {
     reducePower();
     initPins();
     initSPI();
-    initTimer();
+    initWatchdog();
     initADC();
     // initUSART();
 
     // enable global interrupts
     sei();
-    
-    // allow to settle a bit (32.768kHz oscillator to stabilize)
-    _delay_ms(1500);
 
     while (true) {
         if (secs % MEASURE_SECS == 0) {
             enableADC();
-            // give the ADC some time after "asynchronous" sleep mode, 
-            // otherwise the first measurement will be quite off.  
-            _delay_ms(1);
             measureValues();
             // disable ADC before entering sleep mode to save power
             disableADC();
@@ -164,11 +153,7 @@ int main(void) {
                 displayValues();
             }
         }
-        
-        // ensure that one TOSC1 cycle has elapsed before re-entering sleep mode
-        OCR2A = TIMER_COMPARE;
-        loop_until_bit_is_clear(ASSR, OCR2AUB);
-        
+                
         set_sleep_mode(SLEEP_MODE_PWR_SAVE);
         sleep_mode();
     }
