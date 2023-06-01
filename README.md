@@ -42,35 +42,37 @@ are used:
 ## Power Consumption
 
 Between taking the measurements and updating the display, the MCU is set to 
-power-save sleep mode, with Timer2 operated in asynchronous mode clocked from 
-an external 32kHz watch crystal used as wake-up source.
+power-down sleep mode with the watchdog used as wake-up source.
 
-Power consumption then is at about 390µA at 3.8V:
+Power consumption (measured) is at about 400µA at 3.8V:
 
-| Component | Data Sheet | Measured |
-|-----------|-----------:|---------:|
-| MCP1501   |      140µA |    140µA |
-| TMP36     |      <50µA |     22µA |
-| HIH-5030  |      200µA |    200µA |
-| V-Divider |       ¹2µA |      2µA |
+| Component  | Data Sheet | Measured |
+|------------|-----------:|---------:|
+| ATmega328P |     ¹4.2µA |        - |
+| MCP1501    |      140µA |    146µA |
+| TMP36      |      <50µA |     22µA |
+| HIH-5030   |     ²200µA |    211µA |
+| V-Divider  |        N/A |      2µA |
+| 23K640     |        1µA |        - |
+| Display    |       ³1µA |        - |
 
-¹Calculated
-
-The remainder of 26µA is probably due to measurement error + MCU power 
-consumption (data sheet says 0.9µA at 3V).
+¹VCC = 3V
+²VCC = 3.3V
+³VCC = 3V (deep sleep mode)
 
 When measuring temperature, humidity and battery voltage in ADC noise reduction 
 mode, consumption briefly goes above 400µA.
 
-When updating the display, consumption is at around 6mA for about 2-3 seconds.
+When updating the display, consumption is at around 6mA for about 3 seconds. 
+Before that, the MCU has to calculate and format the measurements and prepare 
+the frame in SRAM.
 
 When no measurement has changed, the display is not updated to extend its 
-lifetime and to further save power.
+lifetime and to save power.
 
-The clock of unused modules such as Timer0, Timer1 and USART is switched off to 
+The clock of unused modules TWI, all three timers and USART is switched off to 
 reduce power consumption.
 
-> When the timer is configured to wake up the MCU every 8 seconds, consumption 
-> steadily goes up to ~4mA within each interval. Similar behaviour can be observed 
-> with the watchdog barking every 8 seconds. With the timer waking up the MCU each 
-> second, consumption steadily stays at 390µA.
+> When timer2/the watchdog is configured to wake up the MCU every 8 seconds, 
+> consumption steadily goes up to ~4mA within each interval. With an interval 
+> of 1 second, consumption steadily stays at 400µA.
