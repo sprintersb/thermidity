@@ -125,8 +125,8 @@ static void disableADC(void) {
  * Stops the clock of unused modules to reduce power consumption.
  */
 static void reducePower(void) {
-    // stop TWI, Timer0, Timer1 and USART
-    PRR |= (1 << PRTWI) | (1 << PRTIM0) | (1 << PRTIM1) | (1 << PRUSART0);
+    // stop TWI, Timer0, Timer1, Timer2 and USART
+    PRR |= (1 << PRTWI) | (1 << PRTIM0) | (1 << PRTIM1) | (1 << PRTIM2) | (1 << PRUSART0);
 }
 
 int main(void) {
@@ -154,7 +154,7 @@ int main(void) {
             }
         }
                 
-        set_sleep_mode(SLEEP_MODE_PWR_SAVE);
+        set_sleep_mode(SLEEP_MODE_PWR_DOWN);
         sleep_mode();
     }
 
