@@ -56,15 +56,15 @@ Power consumption (measured) is at about 400µA at 3.8V:
 | 23K640     |        1µA |        - |
 | Display    |       ³1µA |        - |
 
-¹VCC = 3V
-²VCC = 3.3V
-³VCC = 3V (deep sleep mode)
+¹VCC = 3V  
+²VCC = 3.3V  
+³VCC = 3V (deep sleep mode)  
 
 When measuring temperature, humidity and battery voltage in ADC noise reduction 
 mode, consumption briefly goes above 400µA.
 
 When updating the display, consumption is at around 6mA for about 3 seconds. 
-Before that, the MCU has to calculate and format the measurements and prepare 
+Before that, the MCU has to calculate and format the measurements and buffer 
 the frame in SRAM.
 
 When no measurement has changed, the display is not updated to extend its 
