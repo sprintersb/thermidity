@@ -462,7 +462,7 @@
 
   (footprint "HIH-5030-001:HONEYWELL_HIH-5030-001" (layer "F.Cu")
     (tedit 63D95453) (tstamp 5e6fc6ee-6896-41f5-a65f-abe14f8e6c5e)
-    (at 168.148 74.9808)
+    (at 167.64 74.9808)
     (property "AVAILABILITY" "Good")
     (property "MF" "Honeywell")
     (property "MP" "HIH-5030-001")
@@ -579,7 +579,7 @@
       (effects (font (size 1 1) (thickness 0.15)))
       (tstamp 57a2436a-c7ac-45c9-aea3-408a15eb56d9)
     )
-    (fp_text value "50Ohm" (at 0 -1.778 90) (layer "F.Fab")
+    (fp_text value "50" (at 0 -1.778 90) (layer "F.Fab")
       (effects (font (size 1 1) (thickness 0.15)))
       (tstamp 27f7be20-73c4-4a15-aa98-f7b7b5d84049)
     )
@@ -1103,7 +1103,7 @@
 
   (gr_rect (start 111.7 58.9) (end 171.7 88.9) (layer "Edge.Cuts") (width 0.1) (fill none) (tstamp ba3a03dc-3081-4fb6-beb5-ffd9f940fe45))
   (gr_rect (start 111.7 58.9) (end 171.7 88.9) (layer "F.CrtYd") (width 0.05) (fill none) (tstamp 8833f3fd-3226-44ac-90bb-7302f230d0cf))
-  (gr_text "Dode's Thermidity" (at 157.1752 65.024) (layer "F.SilkS") (tstamp 6a1fd53a-ac68-447b-9ec8-b8ff8d3c358d)
+  (gr_text "Dode's Thermidity" (at 157.8864 65.3796) (layer "F.SilkS") (tstamp 6a1fd53a-ac68-447b-9ec8-b8ff8d3c358d)
     (effects (font (size 1.5 1.5) (thickness 0.15)))
   )
   (gr_text "https://luniks.net/thermidity.jsp" (at 141.6812 87.0712) (layer "F.SilkS") (tstamp 6edb407f-1f86-4a60-bccf-e674357c85d9)
