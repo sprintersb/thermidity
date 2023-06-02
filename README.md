@@ -73,6 +73,6 @@ lifetime and to save power.
 The clock of unused modules TWI, all three timers and USART is switched off to 
 reduce power consumption.
 
-> When timer2/the watchdog is configured to wake up the MCU every 8 seconds, 
-> consumption steadily goes up to ~4mA within each interval. With an interval 
+> When timer2/watchdog is configured to wake up the MCU every 8 seconds, 
+> consumption goes up to ~4mA within each interval. With an interval 
 > of 1 second, consumption steadily stays at 400µA.
