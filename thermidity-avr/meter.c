@@ -142,12 +142,17 @@ void displayValues(void) {
     Font unifont = getUnifont();
     Font dejavu = getDejaVu();
     
+    // clear frame
     setFrame(0x00);
-    writeString(0, 0, dejavu, formatTmp(tmpx10));
+    // battery voltage and bitmap
     writeString(0, 182, unifont, formatBat(mVBat));
     writeBitmap(0, 216, bitmapBat(vBatx10));
-    writeString(4, 152, unifont, "Temperature");
+    // temperature with label
+    writeString(1, 0, dejavu, formatTmp(tmpx10));
+    writeString(5, 152, unifont, "Temperature");
+    // humidity with label
     writeString(8, 0, dejavu, formatRh(rh));
     writeString(12, 152, unifont, "Humidity");
+    // update display
     doDisplay();
 }
