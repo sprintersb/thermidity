@@ -10,9 +10,9 @@
 
 #include <avr/io.h>
 
-#define PIN_TMP   PC0
-#define PIN_RH    PC1
-#define PIN_BAT   PC2
+#define PIN_TMP   PC2
+#define PIN_RH    PC3
+#define PIN_BAT   PC1
 
 /* SPI */
 #define DDR_SPI   DDRB
