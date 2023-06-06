@@ -61,11 +61,12 @@ Power consumption (measured) is at about 400µA at 3.8V:
 ³VCC = 3V (deep sleep mode)  
 
 When measuring temperature, humidity and battery voltage in ADC noise reduction 
-mode, consumption briefly goes above 400µA.
+mode, consumption should be about 200µA additionally for ADC plus very short
+MCU awake period for updating the moving average with measured values.
 
 When updating the display, consumption is at around 6mA for about 3 seconds. 
-Before that, the MCU has to calculate and format the measurements and buffer 
-the frame in SRAM.
+Before that, the MCU has to calculate and format the average measurements and 
+buffer the frame in SRAM.
 
 When no measurement has changed, the display is not updated to extend its 
 lifetime and to save power.
