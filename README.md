@@ -41,6 +41,11 @@ are used:
 
 ## Power Consumption
 
+Estimated power consumption is at an average of 231µA, hopefully giving an
+operating time of about 7 months with 3 AAA batteries.
+
+The consumption of each component is about:
+
 | Component  | Data Sheet | Measured |
 |------------|-----------:|---------:|
 | ATmega328P |     ¹4.2µA |    <20µA |
@@ -55,13 +60,13 @@ are used:
 ²VCC = 3.3V  
 ³VCC = 3V (deep sleep mode)  
 
-Between taking the measurements, the MCU is set to power-down sleep mode with 
-the watchdog used as wake-up source. Additionally, the voltage reference 
-including the humidity sensor are powered off. The power consumption (measured) 
-then is at about 43µA at 3.8V for MCU, TMP36, voltage divider and display.
+Between taking measurements, the MCU is set to power-down sleep mode with the
+watchdog used as wake-up source. Additionally, the voltage reference including 
+the humidity sensor are powered off. The power consumption (measured) then is 
+at about 43µA at 3.8V for MCU, TMP36, voltage divider and display.
 
 When measuring temperature, humidity and battery voltage in ADC noise reduction 
-mode, consumption is at about 600µA plus brief MCU awake period for updating 
+mode, consumption is at about 600µA plus a brief MCU awake period for updating 
 the moving average with measured values.
 
 When updating the display, consumption is at around 6mA for about 3 seconds. 
