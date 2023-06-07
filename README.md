@@ -41,14 +41,9 @@ are used:
 
 ## Power Consumption
 
-Between taking the measurements and updating the display, the MCU is set to 
-power-down sleep mode with the watchdog used as wake-up source.
-
-Power consumption (measured) is at about 400µA at 3.8V:
-
 | Component  | Data Sheet | Measured |
 |------------|-----------:|---------:|
-| ATmega328P |     ¹4.2µA |        - |
+| ATmega328P |     ¹4.2µA |    <20µA |
 | MCP1501    |      140µA |    146µA |
 | TMP36      |      <50µA |     22µA |
 | HIH-5030   |     ²200µA |    211µA |
@@ -60,9 +55,14 @@ Power consumption (measured) is at about 400µA at 3.8V:
 ²VCC = 3.3V  
 ³VCC = 3V (deep sleep mode)  
 
+Between taking the measurements, the MCU is set to power-down sleep mode with 
+the watchdog used as wake-up source. Additionally, the voltage reference 
+including the humidity sensor are powered off. The power consumption (measured) 
+then is at about 43µA at 3.8V for MCU, TMP36, voltage divider and display.
+
 When measuring temperature, humidity and battery voltage in ADC noise reduction 
-mode, consumption should be about 200µA additionally for ADC plus very short
-MCU awake period for updating the moving average with measured values.
+mode, consumption is at about 600µA plus brief MCU awake period for updating 
+the moving average with measured values.
 
 When updating the display, consumption is at around 6mA for about 3 seconds. 
 Before that, the MCU has to calculate and format the average measurements and 
@@ -73,7 +73,3 @@ lifetime and to save power.
 
 The clock of unused modules TWI, all three timers and USART is switched off to 
 reduce power consumption.
-
-> When timer2/watchdog is configured to wake up the MCU every 8 seconds, 
-> consumption goes up to ~4mA within each interval. With an interval 
-> of 1 second, consumption steadily stays at 400µA.

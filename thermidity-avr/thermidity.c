@@ -49,10 +49,15 @@ EMPTY_INTERRUPT(ADC_vect);
  * Sets up the pins.
  */
 static void initPins(void) {
+    // set voltage reference pin as output pin
+    DDR_SENS |= (1 << PIN_REF);
+    // drive voltage reference pin low
+    PORT_SENS &= ~(1 << PIN_REF);
+    
     // set MOSI and SCK as output pin
     DDR_SPI |= (1 << PIN_MOSI);
     DDR_SPI |= (1 << PIN_SCK);
-    // pull SS (ensure master) and MISO high
+    // drive SS (ensure master) and MISO high
     PORT_SPI |= (1 << PIN_SS);
     PORT_SPI |= (1 << PIN_MISO);
 
@@ -64,14 +69,14 @@ static void initPins(void) {
     DDR_DSPI |= (1 << PIN_DC);
     DDR_DISP |= (1 << PIN_RST);
 
-    // enable pullup on all output pins
+    // drive SPI and display output pins high
     PORT_SSPI |= (1 << PIN_SRCS);
-    DDR_DSPI |= (1 << PIN_ECS);
-    DDR_DSPI |= (1 << PIN_DC);
+    PORT_DSPI |= (1 << PIN_ECS);
+    PORT_DSPI |= (1 << PIN_DC);
     PORT_DISP |= (1 << PIN_RST);
 
-    // set display BUSY pin as input pin
-    PORT_DISP &= ~(1 << PIN_BUSY);
+    // set display BUSY pin as input pin (default)
+    DDR_DISP &= ~(1 << PIN_BUSY);
 }
 
 /**
@@ -105,6 +110,20 @@ static void initADC(void) {
     ADCSRA |= (1 << ADPS2) | (1 << ADPS1);
     // enable ADC interrupt
     ADCSRA |= (1 << ADIE);
+}
+
+/**
+ * Powers on the voltage reference including humidity sensor.
+ */
+static void powerOnVref(void) {
+    PORT_SENS |= (1 << PIN_REF);
+}
+
+/**
+ * Powers off the voltage reference including humidity sensor.
+ */
+static void powerOffVref(void) {
+    PORT_SENS &= ~(1 << PIN_REF);
 }
 
 /**
@@ -143,10 +162,15 @@ int main(void) {
 
     while (true) {
         if (secs % MEASURE_SECS == 0) {
+            powerOnVref();
+            // give the humidity sensor some time to settle
+            _delay_ms(100);
             enableADC();
             measureValues();
             // disable ADC before entering sleep mode to save power
             disableADC();
+            // power off voltage reference incl. humidity sensor
+            powerOffVref();
 
             if (secs >= DISP_UPD_SECS) {
                 secs = 0;
