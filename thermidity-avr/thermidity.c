@@ -22,6 +22,7 @@
 #include <avr/wdt.h>
 #include <avr/pgmspace.h>
 #include <util/delay.h>
+#include <util/atomic.h>
 
 #include "pins.h"
 #include "meter.h"
@@ -160,8 +161,13 @@ int main(void) {
     // enable global interrupts
     sei();
 
+    uint16_t secsCopy;
     while (true) {
-        if (secs % MEASURE_SECS == 0) {
+        ATOMIC_BLOCK(ATOMIC_FORCEON) {
+            secsCopy = secs;
+        }
+        
+        if (secsCopy % MEASURE_SECS == 0) {
             powerOnVref();
             // give the humidity sensor some time to settle
             _delay_ms(100);
@@ -172,8 +178,11 @@ int main(void) {
             // power off voltage reference incl. humidity sensor
             powerOffVref();
 
-            if (secs >= DISP_UPD_SECS) {
-                secs = 0;
+            if (secsCopy >= DISP_UPD_SECS) {
+                ATOMIC_BLOCK(ATOMIC_FORCEON) {
+                    secs = 0;
+                }
+                
                 displayValues();
             }
         }
