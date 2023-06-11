@@ -63,8 +63,8 @@ sleep mode. Power consumption (measured) then is about 19µA at 3.8V for MCU
 and display including SRAM. 
 
 When measuring temperature, humidity and battery voltage in ADC noise reduction 
-mode, consumption is at about 600µA plus a brief MCU awake period for updating 
-the moving average with measured values.
+mode, consumption should be somewhere around 1mA for 6ms, plus a brief MCU 
+awake period for updating the moving average with measured values.
 
 When updating the display, consumption is at around 6mA for about 3 seconds. 
 Before that, the MCU has to calculate and format the average measurements and 
