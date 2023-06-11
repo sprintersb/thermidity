@@ -50,10 +50,10 @@ EMPTY_INTERRUPT(ADC_vect);
  * Sets up the pins.
  */
 static void initPins(void) {
-    // set voltage reference pin as output pin
-    DDR_SENS |= (1 << PIN_REF);
-    // drive voltage reference pin low
-    PORT_SENS &= ~(1 << PIN_REF);
+    // set sensor power pin as output pin
+    DDR_SENS |= (1 << PIN_PWR);
+    // drive sensor power pin low
+    PORT_SENS &= ~(1 << PIN_PWR);
     
     // set MOSI and SCK as output pin
     DDR_SPI |= (1 << PIN_MOSI);
@@ -114,17 +114,17 @@ static void initADC(void) {
 }
 
 /**
- * Powers on the voltage reference including humidity sensor.
+ * Powers on the sensors.
  */
-static void powerOnVref(void) {
-    PORT_SENS |= (1 << PIN_REF);
+static void powerOnSensors(void) {
+    PORT_SENS |= (1 << PIN_PWR);
 }
 
 /**
- * Powers off the voltage reference including humidity sensor.
+ * Powers off the sensors.
  */
-static void powerOffVref(void) {
-    PORT_SENS &= ~(1 << PIN_REF);
+static void powerOffSensors(void) {
+    PORT_SENS &= ~(1 << PIN_PWR);
 }
 
 /**
@@ -168,7 +168,7 @@ int main(void) {
         }
         
         if (secsCopy % MEASURE_SECS == 0) {
-            powerOnVref();
+            powerOnSensors();
             // give the humidity sensor some time to settle
             _delay_ms(100);
             enableADC();
@@ -176,7 +176,7 @@ int main(void) {
             // disable ADC before entering sleep mode to save power
             disableADC();
             // power off voltage reference incl. humidity sensor
-            powerOffVref();
+            powerOffSensors();
 
             if (secsCopy >= DISP_UPD_SECS) {
                 ATOMIC_BLOCK(ATOMIC_FORCEON) {
