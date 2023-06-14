@@ -129,7 +129,7 @@ void measureValues(void) {
 
 void displayValues(void) {    
     // resistance of the thermistor
-    float resTh = (4096.0 / (avgADCTmp >> EWMA_BS) - 1) * TH_SERI;
+    float resTh = (4096.0 / fmax(1, (avgADCTmp >> EWMA_BS)) - 1) * TH_SERI;
     // temperature in °C
     float tmp = 1.0 / (1.0 / TH_BETA * log(resTh / TH_RESI) + 1.0 / TH_TEMP) - TMP_0C;
     // somehow I don't like to work with floats
