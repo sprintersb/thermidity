@@ -31,7 +31,7 @@
 #define RH_ADC      RH_ADC_100 - RH_ADC_0
 
 /** Weight of the exponential weighted moving average as bit shift */
-#define EWMA_BS     4
+#define EWMA_BS     5
 
 /**
  * Measures temperature, relative humidity and battery voltage and updates 
