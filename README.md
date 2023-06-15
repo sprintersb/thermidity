@@ -39,7 +39,7 @@ A precision thermistor and precision low-voltage humidity sensor are used:
 
 ## Power Consumption
 
-Estimated power consumption is at an average of 100µA, hopefully giving an
+Estimated power consumption is at an average of 113µA, hopefully giving an
 operating time of about a year with 3 AAA batteries including self-discharge.
 
 The consumption of each component is about:
@@ -59,12 +59,12 @@ The consumption of each component is about:
 
 Between taking measurements, the MCU is set to power-down sleep mode with the
 watchdog used as wake-up source. Additionally, the thermistor and humidity 
-sensor are powered off. Between display updates, the display is set to deep 
+sensor are powered off and between display updates, the display is set to deep 
 sleep mode. Power consumption (measured) then is about 19µA at 3.8V for MCU 
 and display including SRAM. 
 
 When measuring temperature, humidity and battery voltage in ADC noise reduction 
-mode, consumption should be somewhere around 1mA for 6ms, plus a brief MCU 
+mode, consumption should be somewhere around 2mA for 6ms, plus a brief MCU 
 awake period for updating the moving average with measured values. Before 
 measuring, the sensors are powered on and given 100ms to settle, consuming 
 about 240µA.
