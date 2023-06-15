@@ -169,13 +169,11 @@ int main(void) {
         
         if (secsCopy % MEASURE_SECS == 0) {
             powerOnSensors();
-            // give the humidity sensor some time to settle
+            // give the humidity sensor time to settle
             _delay_ms(100);
             enableADC();
             measureValues();
-            // disable ADC before entering sleep mode to save power
             disableADC();
-            // power off voltage reference incl. humidity sensor
             powerOffSensors();
 
             if (secsCopy >= DISP_UPD_SECS) {
