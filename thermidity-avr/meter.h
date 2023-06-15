@@ -15,9 +15,6 @@
 
 #define AREF_MV     1100 // 1136
 
-/** The display wants at least 3V */
-#define BAT_LOW     3000
-
 /** 0°C in Kelvin */
 #define TMP_0C      273.15
 
