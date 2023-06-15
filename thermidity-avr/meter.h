@@ -18,7 +18,7 @@
 /** The display wants at least 3V */
 #define BAT_LOW     3000
 
-/** 0 Kelvin */
+/** 0°C in Kelvin */
 #define TMP_0C      273.15
 
 /** Specifications of the NTC Thermistor 0.1°C */
