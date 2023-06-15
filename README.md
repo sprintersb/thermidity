@@ -32,14 +32,15 @@ A precision thermistor and precision low-voltage humidity sensor are used:
 
 | Component  | Accuracy |
 |------------|---------:|
-| Thermistor |   ±0.1°C |
+| Thermistor |  ¹±0.1°C |
 | HIH-5030   |    ±3%RH |
 
+¹Series resistor 0.1% tolerance
 
 ## Power Consumption
 
-Estimated power consumption is at an average of 210µA, hopefully giving an
-operating time of about 7-8 months with 3 AAA batteries.
+Estimated power consumption is at an average of 100µA, hopefully giving an
+operating time of about a year with 3 AAA batteries including self-discharge.
 
 The consumption of each component is about:
 
@@ -64,7 +65,9 @@ and display including SRAM.
 
 When measuring temperature, humidity and battery voltage in ADC noise reduction 
 mode, consumption should be somewhere around 1mA for 6ms, plus a brief MCU 
-awake period for updating the moving average with measured values.
+awake period for updating the moving average with measured values. Before 
+measuring, the sensors are powered on and given 100ms to settle, consuming 
+about 240µA.
 
 When updating the display, consumption is at around 6mA for about 3 seconds. 
 Before that, the MCU has to calculate and format the average measurements and 

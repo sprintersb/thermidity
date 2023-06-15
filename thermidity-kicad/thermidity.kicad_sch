@@ -1591,7 +1591,7 @@
     (property "Reference" "R3" (id 0) (at 189.23 50.7999 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "100k" (id 1) (at 189.23 53.3399 0)
+    (property "Value" "100k 0.1%" (id 1) (at 189.23 53.3399 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" (id 2) (at 184.912 52.07 90)
@@ -1656,7 +1656,7 @@
     (property "Reference" "TH1" (id 0) (at 189.23 38.4174 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "NTC 100k" (id 1) (at 189.23 40.9574 0)
+    (property "Value" "NTC 100k 0.1°C" (id 1) (at 189.23 40.9574 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" (id 2) (at 186.69 38.1 0)
@@ -1989,13 +1989,13 @@
       (reference "R2") (unit 1) (value "1.2M") (footprint "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder")
     )
     (path "/67107e66-dfe9-4c53-82c3-246c71b667ae"
-      (reference "R3") (unit 1) (value "100k") (footprint "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder")
+      (reference "R3") (unit 1) (value "100k 0.1%") (footprint "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder")
     )
     (path "/ce63e81c-5d78-4d98-bb9e-4b0f5b9f1c49"
       (reference "R4") (unit 1) (value "65k") (footprint "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder")
     )
     (path "/982b487a-58ee-40be-91ad-fe1876106c60"
-      (reference "TH1") (unit 1) (value "NTC 100k") (footprint "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder")
+      (reference "TH1") (unit 1) (value "NTC 100k 0.1°C") (footprint "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder")
     )
     (path "/a564f624-0149-43d3-9b25-20abc178b1e7"
       (reference "U1") (unit 1) (value "ATmega328P") (footprint "Package_QFP:TQFP-32_7x7mm_P0.8mm")
