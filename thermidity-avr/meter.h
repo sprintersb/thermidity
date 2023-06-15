@@ -37,14 +37,14 @@
 #define EWMA_BS     4
 
 /**
- * Measures temperature and relative humidity and updates 
+ * Measures temperature, relative humidity and battery voltage and updates 
  * the average values.
  */
 void measureValues(void);
 
 /**
- * Calculates, formats and displays the averaged temperature 
- * and relative humidity values.
+ * Calculates, formats and displays the averaged temperature, relative humidity 
+ * and battery voltage values.
  */
 void displayValues(void);
 
