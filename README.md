@@ -40,7 +40,7 @@ A precision thermistor and precision low-voltage humidity sensor are used:
 ## Power Consumption
 
 Estimated average power consumption is about 220µA, hopefully giving an
-operating time of about 7 months with 3 AAA batteries (1200 mAh).
+operating time of at least 7 months with 3 AAA batteries (1200 mAh).
 
 The consumption of each component is about:
 
