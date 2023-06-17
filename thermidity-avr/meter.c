@@ -23,7 +23,7 @@
 
 static uint32_t avgADCTmp = -1;
 static uint32_t avgADCRh = -1;
-static uint32_t mvAvgBat = -1;
+static uint32_t avgMVBat = -1;
 
 static int16_t prevTmpx10;
 static int16_t prevRh;
@@ -124,7 +124,7 @@ void measureValues(void) {
     avgADCRh = convert(AREF_AVCC, PIN_RH, true, avgADCRh);
     // give the capacitor between AREF and GND some time to discharge
     _delay_us(150);
-    mvAvgBat = convert(AREF_INT, PIN_BAT, false, mvAvgBat);
+    avgMVBat = convert(AREF_INT, PIN_BAT, false, avgMVBat);
 }
 
 void displayValues(void) {    
@@ -141,7 +141,7 @@ void displayValues(void) {
     rh = divRoundNearest(rh * 1000000, 1054600 - tmpx10 * 216UL);
     
     // battery voltage in V x10 (measured one fifth by voltage divider)
-    int8_t vBatx10 = divRoundNearest((mvAvgBat >> EWMA_BS), 20);
+    int8_t vBatx10 = divRoundNearest((avgMVBat >> EWMA_BS), 20);
     
     if (tmpx10 == prevTmpx10 && rh == prevRh && vBatx10 == prevVBatx10) {
         // skip update of display if no change in measurements
