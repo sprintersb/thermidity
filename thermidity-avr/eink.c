@@ -168,11 +168,14 @@ void updateDisplay(void) {
     displayDes();
     
     // - Drive display panel by Command 0x22, 0x20
+    // 0xf4, 0xf5, 0xf6, 0xf7 do full update (DISPLAY mode 1)
+    // 0xfc, 0xfd, 0xfe, 0xff do partial update (DISPLAY mode 2)
+    // fast update as mentioned in the Good Display data sheet is not supported?
     displayCmd();
     displaySel();
     transmit(DISPLAY_UPDATE_CONTROL2);
     displayData();
-    transmit(0xf4); // 0xf4, 0xf5, 0xf6, 0xf7 seem to do the same
+    transmit(0xf4);
     displayDes();
     
     displayCmd();
@@ -189,7 +192,7 @@ void updateDisplay(void) {
     displaySel();
     transmit(DEEP_SLEEP_MODE);
     displayData();
-    transmit(0x01); // Enter Deep Sleep Mode 1
+    transmit(0x11); // Deep Sleep Mode 2 (no need to retain RAM data)
     displayDes();
     
     // - Power OFF

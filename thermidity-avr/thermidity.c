@@ -33,10 +33,10 @@
 #include "utils.h"
 #include "usart.h"
 
-/* Measure and average temperature and relative humidity every 16 seconds */
-#define MEASURE_SECS    16
+/* Measure and average temperature and relative humidity every 32 seconds */
+#define MEASURE_SECS    32
 /* Display should not be updated more frequently than once every 180 seconds */
-#define DISP_UPD_SECS   192
+#define DISP_UPD_SECS   288
 
 static volatile uint16_t secs = DISP_UPD_SECS - 1;
 
