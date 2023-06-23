@@ -53,7 +53,7 @@ The consumption of each component at 3.8V and 22°C is about:
 | V-Divider  |        N/A |      2µA |
 | Display    |       ³N/A |     14µA |
 
-¹VCC = 3V  
+¹VCC = 3V, power-down sleep mode  
 ²VCC = 3.3V  
 ³Display in deep sleep mode + SRAM + SD Card Reader + Bus Transceiver  
 
