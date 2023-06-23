@@ -39,32 +39,37 @@ A precision thermistor and precision low-voltage humidity sensor are used:
 
 ## Power Consumption
 
-Estimated average power consumption is about 220µA, hopefully giving an
-operating time of at least 7 months with 3 AAA batteries (1200 mAh).
+Estimated average power consumption is about 110µA when measuring every 32 
+seconds and updating the display once in 288 seconds, hopefully giving an
+operating time of about a year with 3 AAA batteries (1200 mAh). 
 
-The consumption of each component is about:
+The consumption of each component at 3.8V and 22°C is about:
 
 | Component  | Data Sheet | Measured |
 |------------|-----------:|---------:|
-| ATmega328P |     ¹4.2µA |    <17µA |
+| ATmega328P |     ¹4.2µA |    4.5µA |
 | Thermistor |        N/A |     24µA |
 | HIH-5030   |     ²200µA |    211µA |
 | V-Divider  |        N/A |      2µA |
-| 23K640     |        1µA |        - |
-| Display    |       ³1µA |        - |
+| Display    |       ³N/A |     14µA |
 
 ¹VCC = 3V  
 ²VCC = 3.3V  
-³VCC = 3V (deep sleep mode)  
+³Display in deep sleep mode + SRAM + SD Card Reader + Bus Transceiver  
 
 Between taking measurements, the MCU is set to power-down sleep mode with the
 watchdog used as wake-up source. Additionally, the thermistor and humidity 
 sensor are powered off and between display updates, the display is set to deep 
 sleep mode. Power consumption (measured) then is about 19µA at 3.8V for MCU 
-and display including SRAM. 
+and display.  
+Driving the Enable pin of the display low does not reduce its power consumption, 
+but increases it from ~14µA to ~40µA instead - I have no idea why. 
+Disconnecting VCC does not impact power consumption, but disconnecting GND does; 
+then the remaining consumption of about 4.5µA should be of the MCU which matches 
+nicely what the data sheet of the controller says.
 
 When measuring temperature, humidity and battery voltage in ADC noise reduction 
-mode, consumption should be somewhere around 2mA for 6ms, plus a brief MCU 
+mode, consumption seems to be somewhere around 2mA for 6ms, plus a brief MCU 
 awake period for updating the moving average with measured values. Before 
 measuring, the sensors are powered on and given 100ms to settle, consuming 
 about 240µA.
