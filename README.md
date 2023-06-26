@@ -39,9 +39,9 @@ A precision thermistor and precision low-voltage humidity sensor are used:
 
 ## Power Consumption
 
-Estimated average power consumption is about 110µA when measuring every 32 
-seconds and updating the display once in 288 seconds, hopefully giving an
-operating time of about a year with 3 AAA batteries (1200 mAh). 
+Estimated average power consumption is about 125µA when measuring every 32 
+seconds and updating the display once in about 5 minutes, hopefully giving an
+operating time of about a year with 3 AAA batteries (1100 mAh). 
 
 The consumption of each component at 3.8V and 22°C is about:
 
@@ -62,11 +62,6 @@ watchdog used as wake-up source. Additionally, the thermistor and humidity
 sensor are powered off and between display updates, the display is set to deep 
 sleep mode. Power consumption (measured) then is about 19µA at 3.8V for MCU 
 and display.  
-Driving the Enable pin of the display low does not reduce its power consumption, 
-but increases it from ~14µA to ~40µA instead - I have no idea why. 
-Disconnecting VCC does not impact power consumption, but disconnecting GND does; 
-then the remaining consumption of about 4.5µA should be of the MCU which matches 
-nicely what the data sheet of the controller says.
 
 When measuring temperature, humidity and battery voltage in ADC noise reduction 
 mode, consumption seems to be somewhere around 2mA for 6ms, plus a brief MCU 
