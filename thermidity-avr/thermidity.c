@@ -33,7 +33,7 @@
 #include "utils.h"
 #include "usart.h"
 
-/* Measure and average temperature and relative humidity every 32 seconds */
+/* Measure and average temperature and relative humidity every ~32 seconds */
 #define MEASURE_SECS    32
 /* Display should not be updated more frequently than once every 180 seconds */
 #define DISP_UPD_SECS   288
@@ -54,7 +54,7 @@ static void initPins(void) {
     DDR_SENS |= (1 << PIN_PWR);
     // drive sensor power pin low
     PORT_SENS &= ~(1 << PIN_PWR);
-    
+
     // set MOSI and SCK as output pin
     DDR_SPI |= (1 << PIN_MOSI);
     DDR_SPI |= (1 << PIN_SCK);
@@ -78,7 +78,7 @@ static void initPins(void) {
 
     // set display BUSY pin as input pin (default)
     DDR_DISP &= ~(1 << PIN_BUSY);
-    
+
     // pull all unused pins high/set to defined level to reduce current
     // consumption when not in sleep mode
     PORTB |= (1 << PB6);
@@ -161,6 +161,16 @@ static void reducePower(void) {
     PRR |= (1 << PRTWI) | (1 << PRTIM0) | (1 << PRTIM1) | (1 << PRTIM2) | (1 << PRUSART0);
 }
 
+/**
+ * Disables global interrupts and the watchdog to stop measuring 
+ * and updating the display when batteries are too weak, to limit 
+ * discharging below cutoff voltage.
+ */
+static void powerDown(void) {
+    cli();
+    wdt_disable();
+}
+
 int main(void) {
 
     reducePower();
@@ -178,7 +188,7 @@ int main(void) {
         ATOMIC_BLOCK(ATOMIC_FORCEON) {
             secsCopy = secs;
         }
-        
+
         if (secsCopy % MEASURE_SECS == 0) {
             powerOnSensors();
             // give the humidity sensor time to settle
@@ -192,11 +202,16 @@ int main(void) {
                 ATOMIC_BLOCK(ATOMIC_FORCEON) {
                     secs = 0;
                 }
-                
-                displayValues();
+
+                // measured battery voltage is /5 by voltage divider
+                if (getMVBat() < BAT_LOW / 5) {
+                    powerDown();
+                } else {
+                    displayValues();
+                }
             }
         }
-                
+
         set_sleep_mode(SLEEP_MODE_PWR_DOWN);
         sleep_mode();
     }
