@@ -58,7 +58,7 @@ static void initPins(void) {
     // set MOSI and SCK as output pin
     DDR_SPI |= (1 << PIN_MOSI);
     DDR_SPI |= (1 << PIN_SCK);
-    // drive SS (ensure master) and MISO high
+    // pull SS (ensure master) and MISO high
     PORT_SPI |= (1 << PIN_SS);
     PORT_SPI |= (1 << PIN_MISO);
 
