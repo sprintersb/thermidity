@@ -18,7 +18,7 @@ following components:
     * SRAM 23K640
     * SD Card Reader (not used) 
 
-<img src="https://luniks.net/other/Thermidity/Thermidity-04.jpg"/>
+<img src="https://luniks.net/other/Thermidity/Thermidity-07.jpg"/>
 
 ## Accuracy
 
@@ -39,9 +39,9 @@ A precision thermistor and precision low-voltage humidity sensor are used:
 
 ## Power Consumption
 
-Estimated average power consumption is about 90µA when measuring every 32 
+Estimated average power consumption is about 110µA when measuring every 32 
 seconds and updating the display once in about 5 minutes, hopefully giving an
-operating time of about 15 months with 3 AAA batteries (1100 mAh, 10% 
+operating time of about 12 months with 3 AAA batteries (1100 mAh, 6% 
 self-discharge). 
 
 The consumption of each component at 3.8V and 22°C is about:
@@ -80,6 +80,10 @@ every 10th update is a full update.
 
 When no measurement has changed, the display is not updated at all to extend its 
 lifetime and to save more power.
+
+Below the cutoff voltage of 3.0V, the watchdog is disabled to stop measuring and
+updating the display, to at least delay total discharge of the batteries.
+Consumption of the MCU then is at about 1µA and 24µA of the display.
 
 The clock of unused modules TWI, all three timers and USART is switched off to 
 reduce power consumption.

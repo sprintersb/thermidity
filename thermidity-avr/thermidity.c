@@ -34,9 +34,9 @@
 #include "usart.h"
 
 /* Measure and average temperature and relative humidity every ~32 seconds */
-#define MEASURE_SECS    32
+#define MEASURE_SECS    32 // should be a power of 2 to avoid division 
 /* Display should not be updated more frequently than once every 180 seconds */
-#define DISP_UPD_SECS   288
+#define DISP_UPD_SECS   MEASURE_SECS * 9
 /* Number of fast updates until a full update is done to avoid ghosting */
 #define DISP_MAX_FAST   9
 
