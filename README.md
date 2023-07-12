@@ -2,8 +2,7 @@
 
 [![make](https://github.com/gitdode/thermidity/actions/workflows/build.yml/badge.svg)](https://github.com/gitdode/thermidity/actions/workflows/build.yml)
 
-AVR MCU based battery powered thermometer and hygrometer with e-ink display 
-(work in progress).  
+AVR MCU based battery powered thermometer and hygrometer with e-ink display.  
 Focus is on stable, accurate measurements and low power consumption. 
 And of course on a nice, simple display.
 
@@ -65,10 +64,10 @@ sleep mode. Power consumption (measured) then is about 19µA at 3.8V for MCU
 and display.  
 
 When measuring temperature, humidity and battery voltage in ADC noise reduction 
-mode, consumption seems to be somewhere around 2mA for 6ms, plus a brief MCU 
-awake period for updating the moving average with measured values. Before 
-measuring, the sensors are powered on and given 100ms to settle, consuming 
-about 240µA.
+mode, consumption seems to be somewhere around 2mA for 6ms, plus a brief 
+additional MCU awake period for updating the moving average with measured 
+values. Before measuring, the sensors are powered on and given 100ms to settle, 
+consuming about 240µA.
 
 When updating the display, consumption is at around 6mA for about 3 seconds. 
 Before that, the MCU has to calculate and format the average measurements and 
