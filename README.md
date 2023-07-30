@@ -88,7 +88,7 @@ The clock of unused modules TWI, all three timers and USART is switched off to
 reduce power consumption.
 
 Disabling the ADC between measurements and the SPI between display updates both 
-contributes to a significant reduction of power consumption. With an active SPI, 
+contributes to a significant reduction of power consumption. With an enabled SPI, 
 consumption of the display including its peripheral is extremely unstable and 
 varies between some tens of microamps and several milliamps. When driving the 
 enable pin of the display low, consumption is stable at about 60µA. When not 
