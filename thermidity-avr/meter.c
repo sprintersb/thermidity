@@ -160,8 +160,8 @@ bool displayValues(bool fast) {
     prevRh = rh;
     prevVBatx10 = vBatx10;
     
-    Font unifont = getUnifont();
-    Font dejavu = getDejaVu();
+    const __flash Font *unifont = & theUnifont;
+    const __flash Font *dejavu = & theDejaVu;
     
     // clear frame
     setFrame(0x00);
