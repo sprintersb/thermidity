@@ -19,5 +19,7 @@
  */
 const Font getUnifont(void);
 
+extern const __flash Font theUnifont;
+
 #endif /* UNIFONT_H */
 

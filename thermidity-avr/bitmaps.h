@@ -29,15 +29,16 @@ typedef struct {
     /** Height of the bitmap, must be a multiple of 8. */
     const uint16_t height;
     /** The actual bitmap. */
-    const uint8_t *bitmap;
+    const __flash uint8_t *bitmap;
 } Bitmap;
 
 /**
- * Returns the bitmap at the given index.
+ * Returns the flash adress bitmap at the given index.
  * @param index
  * @return Bitmap
  */
-Bitmap getBitmap(uint8_t index);
+
+extern const __flash Bitmap AllBitmaps[];
 
 #endif /* BITMAPS_H */
 

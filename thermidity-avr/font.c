@@ -6,19 +6,16 @@
  */
 
 #include <stdio.h>
-#include <avr/pgmspace.h>
 #include "font.h"
 
-Glyph getGlyph(Font font, uint16_t code) {
-    for (size_t i = 0; i < font.length; i++) {
-        if (pgm_read_word(&font.glyphs[i].code) == code) {
-            static Glyph glyph;
-            memcpy_P(&glyph, &font.glyphs[i], sizeof (Glyph));
-            
-            return glyph;
+const __flash Glyph* getGlyphAddress (const __flash Font *font, uint16_t code) {
+    const __flash Glyph *pglyph = & font->glyphs[0];
+    for (size_t i = 0; i < font->length; i++, pglyph++) {
+        if (pglyph->code == code) {
+            return pglyph;
         }
     }
-    
+
     // return question mark if unknown code point
-    return getGlyph(font, 0x003f);
+    return getGlyphAddress (font, 0x003f);
 }

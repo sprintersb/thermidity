@@ -17,5 +17,7 @@
  */
 const Font getDejaVu(void);
 
+extern const __flash Font theDejaVu;
+
 #endif /* DEJAVU_H */
 
