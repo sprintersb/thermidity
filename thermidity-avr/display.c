@@ -121,7 +121,7 @@ uint8_t writeBitmap(uint16_t row, uint16_t col, uint16_t index) {
     return bitmap->width;
 }
 
-uint8_t writeGlyph(uint16_t row, uint16_t col, const __flash Font *font, uint16_t code)
+uint8_t writeGlyph(uint16_t row, uint16_t col, const __flash Font *font, code_t code)
 {
     const __flash Glyph *glyph = getGlyphAddress (font, code);
     bufferBitmap (row, col, glyph->bitmap, glyph->width, font->height);
@@ -140,7 +140,7 @@ void writeString(uint16_t row, uint16_t col, const __flash Font *font, char *str
             offset = 64;
         } else {
             uint16_t code = c + offset;
-            col += writeGlyph(row, col, font, code);
+            col += writeGlyph(row, col, font, (code_t) code);
             offset = 0;
         }
     }

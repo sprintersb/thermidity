@@ -27,6 +27,7 @@ CFLAGS += -Wall -Wstrict-prototypes
 CFLAGS += -g -ggdb
 CFLAGS += -ffunction-sections -fdata-sections -Wl,--gc-sections -Wl,--relax
 CFLAGS += -std=gnu99
+
 # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105523
 # CFLAGS += --param=min-pagesize=0
 
@@ -44,13 +45,30 @@ all: $(TARGET).hex
 %.elf: $(SRC)
 	$(CC) $(CFLAGS) $(SRC) --output $@ 
 
+$(TARGET).elf: bitmaps.h dejavu.h display.h eink.h font.h meter.h pins.h \
+	       spi.h sram.h unifont.h usart.h utils.h
+
+$(TARGET).elf: Makefile
+
+# Auto-generated lookup tables.
+
+$(TARGET).elf: unifont-lookup.h dejavu-lookup.h
+
+unifont-lookup.h: unifont.c gen-lookup.py Makefile
+	./gen-lookup.py $< "Glyph glyphs[]" "};" QUESTION_MARK  \
+		"static const __flash uint8_t lookup_unifont[256]" > $@
+
+dejavu-lookup.h: dejavu.c gen-lookup.py Makefile
+	./gen-lookup.py $< "Glyph glyphs[]" "};" QUESTION_MARK  \
+		"static const __flash uint8_t lookup_dejavu[256]" > $@
+
 disasm: $(TARGET).lst
 
 eeprom: $(TARGET).eeprom
 
 %.lst: %.elf
 	$(OBJDUMP) -S $< > $@
- 
+
 size:  $(TARGET).elf
 	$(AVRSIZE) -G $(TARGET).elf
 
@@ -58,7 +76,8 @@ clean:
 	rm -f $(TARGET).elf $(TARGET).hex $(TARGET).obj \
 	$(TARGET).o $(TARGET).d $(TARGET).eep $(TARGET).lst \
 	$(TARGET).lss $(TARGET).sym $(TARGET).map $(TARGET)~ \
-	$(TARGET).eeprom
+	$(TARGET).eeprom \
+	unifont-lookup.h dejavu-lookup.h
 
 flash: $(TARGET).hex 
 	$(AVRDUDE) -c $(PROGRAMMER_TYPE) -p $(MCU) $(PROGRAMMER_ARGS) -U flash:w:$<

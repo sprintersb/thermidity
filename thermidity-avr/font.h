@@ -8,12 +8,19 @@
 #ifndef FONT_H
 #define FONT_H
 
+#include <stdint.h>
+
+/** Type of the code point element of Glyphs.
+ *  Actually, all current codes fit in 8 bits, so uint8_t would be ok.
+ */
+typedef uint16_t code_t;
+
 /**
  * A glyph with its pseudo UTF-8 code point, width and bitmap.
  */
 typedef struct {
     /** Pseudo UTF-8 code point of the glyph. */
-    const uint16_t code;
+    const code_t code;
     /** Width of the glyph. */
     const uint8_t width;
     /** Bitmap of the glyph. */
@@ -31,6 +38,10 @@ typedef struct {
     const uint8_t length;
     /** Height of (the glyphs of) this font. */
     const uint8_t height;
+    /** A lookup table of 256 bytes that maps Glyph.code to the position
+     *  of the glyph in @glyphs.  If no lookuptable is available or wanted,
+     *  set to NULL.  */
+    const __flash uint8_t *code_to_id;
 } Font;
 
 /**
@@ -41,6 +52,6 @@ typedef struct {
  * @param code
  * @return Glyph
  */
-const __flash Glyph* getGlyphAddress (const __flash Font *font, uint16_t code);
+const __flash Glyph* getGlyphAddress (const __flash Font *font, code_t code);
 
 #endif /* FONT_H */

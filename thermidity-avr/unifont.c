@@ -970,4 +970,9 @@ static const __flash Glyph glyphs[] = {
     {0x00ff, WIDTH, y_diaeresis}
 };
 
-const __flash Font theUnifont = { glyphs, ARRAY_LENGTH(glyphs), HEIGHT };
+#include "unifont-lookup.h"
+
+const __flash Font theUnifont =
+{
+    glyphs, ARRAY_LENGTH(glyphs), HEIGHT, lookup_unifont
+};
