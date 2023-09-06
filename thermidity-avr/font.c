@@ -8,8 +8,15 @@
 #include <stdio.h>
 #include "font.h"
 
-const __flash Glyph* getGlyphAddress(const __flash Font *font, uint16_t code) {
-    
+const __flash Glyph* getGlyphAddress(const __flash Font *font, code_t code) {
+    if (font->code_to_id != NULL) {
+        // Font provides a lookup table that maps codes to glyph indexes.
+        uint8_t id = font->code_to_id[code];
+        return & font->glyphs[id];
+    }
+
+    // No lookup table available.  Glyphs in glyphs[] are ordered according
+    // to their .code fields, thus we can do a binary search on .code.
     // https://en.wikipedia.org/wiki/Binary_search_algorithm
     int16_t l = 0;
     int16_t r = font->length - 1;
