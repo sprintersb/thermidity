@@ -15,7 +15,9 @@ following components:
 * E-Ink display Adafruit Monochrome 2.13" 250x122
     * Driver SSD1680
     * SRAM 23K640
-    * SD Card Reader (not used) 
+    * SD Card Reader (not used)
+ 
+Thanks to https://github.com/sprintersb for helping me to improve the code and making it more efficient!
 
 <img src="https://luniks.net/other/Thermidity/Thermidity-07.jpg"/>
 
