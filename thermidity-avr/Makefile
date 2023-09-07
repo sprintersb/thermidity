@@ -25,7 +25,7 @@ CFLAGS += -Os -I.
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums 
 CFLAGS += -Wall -Wstrict-prototypes
 CFLAGS += -g -ggdb
-CFLAGS += -ffunction-sections -fdata-sections -Wl,--gc-sections -Wl,--relax
+CFLAGS += -ffunction-sections -fdata-sections -Wl,--gc-sections -mrelax
 CFLAGS += -std=gnu99
 # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105523
 # CFLAGS += --param=min-pagesize=0
