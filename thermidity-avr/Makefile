@@ -11,7 +11,8 @@ PROGRAMMER_TYPE = avrispmkII
 PROGRAMMER_ARGS = 
 
 MAIN = thermidity.c
-SRC = meter.c font.c unifont.c dejavu.c bitmaps.c spi.c sram.c eink.c display.c usart.c utils.c
+SRC = bitmaps.c dejavu.c display.c eink.c font.c meter.c spi.c sram.c \
+	unifont.c usart.c utils.c
 
 CC = avr-gcc
 OBJCOPY = avr-objcopy
@@ -25,7 +26,7 @@ CFLAGS += -Os -I.
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums 
 CFLAGS += -Wall -Wstrict-prototypes
 CFLAGS += -g -ggdb
-CFLAGS += -ffunction-sections -fdata-sections -Wl,--gc-sections -Wl,--relax
+CFLAGS += -ffunction-sections -fdata-sections -Wl,--gc-sections -mrelax
 CFLAGS += -std=gnu99
 # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105523
 # CFLAGS += --param=min-pagesize=0
@@ -34,7 +35,10 @@ TARGET = $(strip $(basename $(MAIN)))
 SRC += $(TARGET).c
 
 OBJ = $(SRC:.c=.o) 
-OBJ = $(SRC:.S=.o) 
+OBJ = $(SRC:.S=.o)
+	
+$(TARGET).elf: bitmaps.h dejavu.h display.h eink.h font.h meter.h pins.h \
+	spi.h sram.h unifont.h usart.h utils.h Makefile
 
 all: $(TARGET).hex
 
