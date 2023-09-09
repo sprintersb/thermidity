@@ -3,8 +3,6 @@
 # Simplified version from: https://github.com/hexagon5un/AVR-Programming
 
 MCU = atmega328p
-# for NetBeans, see https://www.nongnu.org/avr-libc/user-manual/using_tools.html
-MMCU = __AVR_ATmega328P__
 F_CPU = 8000000
 BAUD = 9600
 PROGRAMMER_TYPE = avrispmkII
@@ -21,7 +19,6 @@ AVRSIZE = avr-size
 AVRDUDE = avrdude
 
 CFLAGS = -mmcu=$(MCU) -DF_CPU=$(F_CPU)UL -DBAUD=$(BAUD) 
-CFLAGS += -D$(MMCU)
 CFLAGS += -Os -I.
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums 
 CFLAGS += -Wall -Wstrict-prototypes

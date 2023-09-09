@@ -29,101 +29,84 @@
   </sourceRootList>
   <projectmakefile>/home/dode/dev/thermidity/thermidity-avr/Makefile</projectmakefile>
   <confs>
-    <conf name="Default" type="0">
+    <conf name="Custom" type="1">
       <toolsSet>
         <compilerSet>AVR2.1-GCC13.2|GNU</compilerSet>
         <dependencyChecking>false</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
-      <codeAssistance>
-      </codeAssistance>
-      <makefileType>
-        <makeTool>
-          <buildCommandWorkingDir>/home/dode/dev/thermidity/thermidity-avr</buildCommandWorkingDir>
-          <buildCommand>${MAKE} -f Makefile</buildCommand>
-          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
-          <executablePath></executablePath>
-          <cTool>
-            <incDir>
-              <pElem>.</pElem>
-            </incDir>
-            <preprocessorList>
-              <Elem>__flash=volatile</Elem>
-            </preprocessorList>
-          </cTool>
-          <ccTool>
-            <incDir>
-              <pElem>.</pElem>
-            </incDir>
-            <preprocessorList>
-              <Elem>__flash=volatile</Elem>
-            </preprocessorList>
-          </ccTool>
-        </makeTool>
-        <preBuild>
-          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
-          <preBuildCommand></preBuildCommand>
-        </preBuild>
-      </makefileType>
+      <compileType>
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>BAUD=9600</Elem>
+            <Elem>F_CPU=8000000UL</Elem>
+            <Elem>__AVR_ATmega328P__</Elem>
+            <Elem>__flash=volatile</Elem>
+          </preprocessorList>
+        </cTool>
+      </compileType>
       <item path="/home/dode/dev/thermidity/thermidity-avr/bitmaps.c"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="3">
       </item>
       <item path="/home/dode/dev/thermidity/thermidity-avr/dejavu.c"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="3">
       </item>
       <item path="/home/dode/dev/thermidity/thermidity-avr/display.c"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="3">
       </item>
       <item path="/home/dode/dev/thermidity/thermidity-avr/eink.c"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="3">
       </item>
       <item path="/home/dode/dev/thermidity/thermidity-avr/font.c"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="3">
       </item>
       <item path="/home/dode/dev/thermidity/thermidity-avr/meter.c"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="3">
       </item>
       <item path="/home/dode/dev/thermidity/thermidity-avr/spi.c"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="3">
       </item>
       <item path="/home/dode/dev/thermidity/thermidity-avr/sram.c"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="3">
       </item>
       <item path="/home/dode/dev/thermidity/thermidity-avr/thermidity.c"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="3">
       </item>
       <item path="/home/dode/dev/thermidity/thermidity-avr/unifont.c"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="3">
       </item>
       <item path="/home/dode/dev/thermidity/thermidity-avr/usart.c"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="3">
       </item>
       <item path="/home/dode/dev/thermidity/thermidity-avr/utils.c"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="3">
       </item>
     </conf>
   </confs>
