@@ -33,18 +33,19 @@
 #include "usart.h"
 
 /* Measure and average temperature and relative humidity every ~32 seconds */
-#define MEASURE_SECS    32 // should be a power of 2 to avoid division 
+#define MEASURE_INTS    4 // should be a power of 2 to avoid division 
 /* Display should not be updated more frequently than once every 180 seconds */
-#define DISP_UPD_SECS   MEASURE_SECS * 9
+#define DISP_UPD_INTS   36
 /* Number of fast updates until a full update is done to avoid ghosting */
 #define DISP_MAX_FAST   9
 
-static volatile uint16_t secs = DISP_UPD_SECS - 1;
+/* 1 int = 8 seconds */
+static volatile uint8_t ints = DISP_UPD_INTS;
 
 static uint8_t updates = DISP_MAX_FAST + 1;
 
 ISR(WDT_vect) {
-    secs++;
+    ints++;
 }
 
 EMPTY_INTERRUPT(ADC_vect);
@@ -111,8 +112,8 @@ static void initWatchdog(void) {
     wdt_reset();
     // watchdog change enable
     WDTCSR |= (1 << WDCE) | (1 << WDE);
-    // enable interrupt, disable system reset, bark every 1 seconds
-    WDTCSR = (1 << WDIE) | (0 << WDE) | (1 << WDP2) | (1 << WDP1);
+    // enable interrupt, disable system reset, bark every 8 seconds
+    WDTCSR = (1 << WDIE) | (0 << WDE) | (1 << WDP3) | (1 << WDP0);
 }
 
 /**
@@ -200,13 +201,8 @@ int main(void) {
     // enable global interrupts
     sei();
 
-    uint16_t secsCopy;
     while (true) {
-        ATOMIC_BLOCK(ATOMIC_FORCEON) {
-            secsCopy = secs;
-        }
-
-        if (secsCopy % MEASURE_SECS == 0) {
+        if (ints % MEASURE_INTS == 0) {
             powerOnSensors();
             // give the humidity sensor time to settle
             _delay_ms(100);
@@ -215,10 +211,8 @@ int main(void) {
             disableADC();
             powerOffSensors();
 
-            if (secsCopy >= DISP_UPD_SECS) {
-                ATOMIC_BLOCK(ATOMIC_FORCEON) {
-                    secs = 0;
-                }
+            if (ints >= DISP_UPD_INTS) {
+                ints = 0;
 
                 // measured battery voltage is /5 by voltage divider
                 if (getMVBat() < BAT_LOW / 5) {
