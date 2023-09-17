@@ -94,6 +94,11 @@
             tool="0"
             flavor2="3">
       </item>
+      <item path="/home/dode/dev/thermidity/thermidity-avr/types.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="/home/dode/dev/thermidity/thermidity-avr/unifont.c"
             ex="false"
             tool="0"
@@ -108,8 +113,6 @@
             ex="false"
             tool="0"
             flavor2="3">
-      </item>
-      <item path="types.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
