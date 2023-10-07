@@ -11,7 +11,6 @@
       <in>spi.c</in>
       <in>sram.c</in>
       <in>thermidity.c</in>
-      <in>types.h</in>
       <in>unifont.c</in>
       <in>usart.c</in>
       <in>utils.c</in>
